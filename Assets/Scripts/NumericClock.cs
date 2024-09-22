@@ -14,7 +14,7 @@ public class NumericClock : MonoBehaviour
         ticker.OnTimeSecondTick += AddSeconds;
         ticker.OnTimeSet += SetTime;
         inputField.onSelect.AddListener(_ => ticker.CanTick = false);
-        inputField.onSubmit.AddListener(_ => TrySetTimeFromInputField());
+        inputField.onDeselect.AddListener(_ => TrySetTimeFromInputField());
     }
 
     private void OnDisable()
@@ -22,6 +22,7 @@ public class NumericClock : MonoBehaviour
         ticker.OnTimeSecondTick -= AddSeconds;
         ticker.OnTimeSet -= SetTime;
         inputField.onSelect.RemoveAllListeners();
+        inputField.onDeselect.RemoveAllListeners();
     }
 
     private void AddSeconds(float deltaTime)
